@@ -4,44 +4,58 @@
 
 [Ll]ibrary/
 [Tt]emp/
-[Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-[Ll]ogs/
+[Oo]bj/
 [Mm]emoryCaptures/
+*.stacktrace
 
-# ============ #
-# User Settings #
-# ============ #
-
-UserSettings/
+# Cache & Logs
+.vs/
 *.csproj
 *.unityproj
 *.sln
+*.user
 *.suo
 *.tmp
-*.user
 *.userprefs
 *.pidb
 *.booproj
 *.svd
 
-# =============== #
-# OS Generated #
-# =============== #
+# Auto-generated Unity files
+*.apk
+*.aab
+*.unitypackage
 
-.DS_Store
-Thumbs.db
-
-# =============== #
-# Rider #
-# =============== #
-
+# JetBrains Rider
 .idea/
 *.sln.iml
 
-# =============== #
-# Visual Studio Code #
-# =============== #
+# ========== #
+# OS Specific #
+# ========== #
 
-.vscode/
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ============ #
+# User-specific #
+# ============ #
+
+*.prefs
+*.swp
+*.log
+*.orig
+
+# ========== #
+# Git itself #
+# ========== #
+
+.gitignore
+.gitattributes
