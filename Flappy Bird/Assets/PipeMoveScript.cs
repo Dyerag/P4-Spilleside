@@ -13,7 +13,7 @@ public class PipeMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log($"Start position: {transform.position.x}");
+
     }
 
     // Update is called once per frame
