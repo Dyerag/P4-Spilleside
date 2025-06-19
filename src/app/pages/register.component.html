@@ -1,0 +1,18 @@
+<div style="max-width: 400px; margin: auto; padding: 2rem;">
+    <h2>Register</h2>
+    <form (ngSubmit)="register()">
+      <div>
+        <input [(ngModel)]="username" name="username" placeholder="Username" required class="input" />
+      </div>
+      <div>
+        <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required class="input" />
+      </div>
+      <div style="margin-bottom: 10px; text-align: center; border-top: 1px solid #007BFF; padding-top: 10px;">
+        <a routerLink="/login" style="color: #007BFF; text-decoration: none;">Already have an account? Login</a>
+      </div>
+      <div>
+        <button type="submit" class="button">Register</button>
+      </div>
+    </form>
+  </div>
+  
