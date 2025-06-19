@@ -10,7 +10,7 @@ public class BirdScript : MonoBehaviour
     public float flapStrength;
     public LogicScript logic;
     // Stopper input når bird rammer en pipe
-    private bool birdIsAlive = true;
+    public bool birdIsAlive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +28,18 @@ public class BirdScript : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        FailState();
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 0)
+        {
+            FailState();
+        }
+    }
+
+    private void FailState()
     {
         logic.GameOver();
         birdIsAlive = false;
