@@ -44,7 +44,7 @@ public class PipeSpawnScript : MonoBehaviour
         // Bruger forskydelsen og Pipe Spawners position for at finde den laveste og højeste y position et par rør kan ha'.
         float lowestPoint = transform.position.y - heightOffset;
         float highestPoint = transform.position.y + heightOffset;
-        // Skaber et nyt gameObject ved brug af den angivne pipe prefab, x positionen og rotationen af spawneren, og en tilfældig y værdi ved brug af lowestPoint og highestPoint.
+        // Skaber et nyt gameObject ved brug af pipe prefab. PipeSpawner's x position og rotation bruges. En tilfældig y værdi mellem lowestPoint og highestPoint.
         Instantiate(pipe, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
     }
 }

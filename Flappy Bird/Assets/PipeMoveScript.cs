@@ -19,8 +19,14 @@ public class PipeMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /* Får objektet til at bevæge sig mod venstre. Det bruger Vector3, så movespeed ganges med Vector3.left, for at få movespeed mod venstre i Vector3 format.
+         * Det ganges med deltaTime, og giver hvor mange enheder med venstre den skal rykke, og lægger så det til positionen */
+        /* Koden køres så hurtigt og ofte som muligt, og køre derfor med forskellige hastigheder på forskellige maskiner. DeltaTime giver antallet af sekunder mellem hver frame.
+         * Uden at gange med deltaTime, ville flytningen af x positionen være dem samme, og hurtigere maskiner ville gå igennem Koden oftere, og derved flytte
+         * positionen oftere. Ved at gange movespeed med deltaTime vil hurtigere maskiner få en mindre afstand, og langsommere, en større. */
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
 
+        // Når objektet er flyttet langt nok til venstre, slettes den
         if (transform.position.x < deadZone)
         {
             Debug.Log("Pipe Deleted");
