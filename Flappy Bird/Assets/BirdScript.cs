@@ -33,7 +33,7 @@ public class BirdScript : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 0)
+        if (collision.gameObject.layer == 6)
         {
             FailState();
         }
