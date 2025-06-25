@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 223913314}
   - component: {fileID: 223913313}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Score Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -642,7 +642,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1063,10 +1063,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a8be1b0dd639a4cba0c5c03b81c3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PointGain: 1
   playerScore: 0
   ScoreText: {fileID: 223913313}
+  ScoreDisplay: {fileID: 223913311}
   gameOverScreen: {fileID: 1299672862}
-  PointGain: 1
+  Bird: {fileID: 1716724281}
+  PipeSpawner: {fileID: 1997143802}
+  StartMenu: {fileID: 0}
 --- !u!4 &1921006368
 Transform:
   m_ObjectHideFlags: 0
