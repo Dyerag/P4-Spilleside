@@ -1,16 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LogicScript : MonoBehaviour
 {
+    // PointGain bliver false når det er game over, for at undgå at tjene flere points mens man er død
+    public bool PointGain = true;
     public int playerScore;
     public Text ScoreText;
+    public GameObject ScoreDisplay;
     public GameObject gameOverScreen;
-    // PointGain bliver false når det er game over, for at undgå at tjene flere point mens man er død
-    public bool PointGain = true;
+    public GameObject Bird;
+    public GameObject PipeSpawner;
+    public GameObject StartMenu;
 
     // ContextMenu tilføjer en knap til at teste metoden
     /// <summary>
