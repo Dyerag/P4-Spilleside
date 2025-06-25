@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class BirdScript : MonoBehaviour
@@ -11,13 +12,13 @@ public class BirdScript : MonoBehaviour
     public LogicScript logic;
     // Stopper input når bird rammer en pipe
     public bool birdIsAlive = true;
+    public AudioSource Flap;
 
     // Start is called before the first frame update
     void Start()
     {
         // Finder LogicScript gennem Logic Manager via tag
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-
     }
 
     // Update is called once per frame
@@ -25,10 +26,12 @@ public class BirdScript : MonoBehaviour
     {
         // Læser inputs for om space er trykket, og Bird stadigt er i live
         if (Input.GetKeyDown(KeyCode.Space) == true && birdIsAlive)
-            Rigidbody.velocity = Vector2.up * flapStrength;
+        {
+            FlapAudio();
+        }
 
         // Stopper Bird fra at blive ved med at falde
-        if (transform.position.y < -40 || transform.position.y > 40)
+        if (transform.position.y < -40 || transform.position.y > 40|| transform.position.x < -40 || transform.position.x > 40)
             // Stopper Bird fra at bevæge sig når den er udenfor Play Area
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
     }
@@ -54,4 +57,10 @@ public class BirdScript : MonoBehaviour
         logic.GameOver();
 
     }
+    private void FlapAudio()
+    {
+        Flap.Play();
+        Rigidbody.velocity = Vector2.up * flapStrength;
+    }
+
 }
