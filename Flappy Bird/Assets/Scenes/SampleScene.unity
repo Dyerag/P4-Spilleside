@@ -5839,7 +5839,7 @@ MonoBehaviour:
   flapStrength: 16.2
   logic: {fileID: 0}
   birdIsAlive: 1
-  Flap: {fileID: 1716724287}
+  FlapAudio: {fileID: 1716724287}
 --- !u!58 &1716724286
 CircleCollider2D:
   m_ObjectHideFlags: 0
