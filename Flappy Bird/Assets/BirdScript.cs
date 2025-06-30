@@ -12,7 +12,7 @@ public class BirdScript : MonoBehaviour
     public LogicScript logic;
     // Stopper input når bird rammer en pipe
     public bool birdIsAlive = true;
-    public AudioSource Flap;
+    public AudioSource FlapAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,8 @@ public class BirdScript : MonoBehaviour
         // Læser inputs for om space er trykket, og Bird stadigt er i live
         if (Input.GetKeyDown(KeyCode.Space) == true && birdIsAlive)
         {
-            FlapAudio();
+            Rigidbody.velocity = Vector2.up * flapStrength;
+            FlapAudio.Play();
         }
 
         // Stopper Bird fra at blive ved med at falde
@@ -57,10 +58,4 @@ public class BirdScript : MonoBehaviour
         logic.GameOver();
 
     }
-    private void FlapAudio()
-    {
-        Flap.Play();
-        Rigidbody.velocity = Vector2.up * flapStrength;
-    }
-
 }
