@@ -32,7 +32,7 @@ public class BirdScript : MonoBehaviour
         }
 
         // Stopper Bird fra at blive ved med at falde
-        if (transform.position.y < -40 || transform.position.y > 40|| transform.position.x < -40 || transform.position.x > 40)
+        if (transform.position.y < -40 || transform.position.y > 40 || transform.position.x < -40 || transform.position.x > 40)
             // Stopper Bird fra at bevæge sig når den er udenfor Play Area
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
     }
@@ -56,6 +56,5 @@ public class BirdScript : MonoBehaviour
     {
         birdIsAlive = false;
         logic.GameOver();
-
     }
 }
