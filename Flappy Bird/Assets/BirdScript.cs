@@ -13,6 +13,7 @@ public class BirdScript : MonoBehaviour
     // Stopper input når bird rammer en pipe
     public bool birdIsAlive = true;
     public AudioSource FlapAudio;
+    public Animator Animator;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class BirdScript : MonoBehaviour
             Rigidbody.velocity = Vector2.up * flapStrength;
             FlapAudio.Play();
         }
+
+            Animator.SetFloat("Ascend", Rigidbody.velocity.y);
 
         // Stopper Bird fra at blive ved med at falde
         if (transform.position.y < -40 || transform.position.y > 40 || transform.position.x < -40 || transform.position.x > 40)
