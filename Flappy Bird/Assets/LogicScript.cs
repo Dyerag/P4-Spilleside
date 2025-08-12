@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +13,6 @@ public class LogicScript : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject Bird;
     public GameObject PipeSpawner;
-    public GameObject StartMenu;
 
     // ContextMenu tilføjer en knap til at teste metoden
     /// <summary>
@@ -40,6 +39,18 @@ public class LogicScript : MonoBehaviour
     public void GameOver()
     {
         PointGain = false;
+        SaveScore();
         gameOverScreen.SetActive(true);
+    }
+
+    private void SaveScore()
+    {
+        string file = "Score.txt";
+
+        using (StreamWriter writer = new StreamWriter(file, false))
+        {
+            writer.WriteLine(playerScore);
+        }
+
     }
 }

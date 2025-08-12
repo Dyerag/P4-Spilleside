@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class BirdScript : MonoBehaviour
@@ -32,7 +29,7 @@ public class BirdScript : MonoBehaviour
             FlapAudio.Play();
         }
 
-            Animator.SetFloat("Ascend", Rigidbody.velocity.y);
+        Animator.SetFloat("Ascend", Rigidbody.velocity.y);
 
         // Stopper Bird fra at blive ved med at falde
         if (transform.position.y < -40 || transform.position.y > 40 || transform.position.x < -40 || transform.position.x > 40)
@@ -46,7 +43,7 @@ public class BirdScript : MonoBehaviour
         FailState();
     }
 
-    // Når Bird forlader trigger objektet på lag seks, som er Game Area, går spildet tabt
+    // Når Bird forlader trigger objektet på lag seks, som er Game Area, er spildet tabt
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 6)
@@ -57,6 +54,8 @@ public class BirdScript : MonoBehaviour
 
     private void FailState()
     {
+        if (!birdIsAlive)
+            return;
         birdIsAlive = false;
         logic.GameOver();
     }
