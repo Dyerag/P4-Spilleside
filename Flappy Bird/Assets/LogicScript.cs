@@ -1,4 +1,5 @@
 using System.IO;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,9 @@ public class LogicScript : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject Bird;
     public GameObject PipeSpawner;
+
+    [DllImport("__Internal")]
+    private static extern void SaveScore(string score);
 
     // ContextMenu tilføjer en knap til at teste metoden
     /// <summary>
@@ -40,18 +44,9 @@ public class LogicScript : MonoBehaviour
     public void GameOver()
     {
         PointGain = false;
-        SaveScore();
+        // Angular siden skal have ha en function der er synlig, umiddelbart med samme navn som denne
+        SaveScore(JsonUtility.ToJson(new Score(playerScore)));
         gameOverScreen.SetActive(true);
-    }
-
-    private void SaveScore()
-    {
-        string file = "Score.txt";
-
-        using (StreamWriter writer = new StreamWriter(file, false))
-        {
-            writer.WriteLine(JsonUtility.ToJson(new Score (playerScore)));
-        }
     }
 }
 
