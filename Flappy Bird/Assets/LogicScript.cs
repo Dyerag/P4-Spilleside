@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class LogicScript : MonoBehaviour
 {
     // PointGain bliver false når det er game over, for at undgå at tjene flere points mens man er død
@@ -49,8 +50,18 @@ public class LogicScript : MonoBehaviour
 
         using (StreamWriter writer = new StreamWriter(file, false))
         {
-            writer.WriteLine(playerScore);
+            //writer.WriteLine(JsonSerializer.Serialize(output));
+            // In SaveScore(), replace the commented out line with:
+            writer.WriteLine(JsonUtility.ToJson(new Score(playerScore)));
         }
+    }
+}
 
+public class Score
+{
+    public int PlayerScore;
+    public Score(int score)
+    {
+        PlayerScore = score;
     }
 }
