@@ -50,9 +50,7 @@ public class LogicScript : MonoBehaviour
 
         using (StreamWriter writer = new StreamWriter(file, false))
         {
-            //writer.WriteLine(JsonSerializer.Serialize(output));
-            // In SaveScore(), replace the commented out line with:
-            writer.WriteLine(JsonUtility.ToJson(new Score(playerScore)));
+            writer.WriteLine(playerScore);
         }
     }
 }
