@@ -50,7 +50,7 @@ public class LogicScript : MonoBehaviour
 
         using (StreamWriter writer = new StreamWriter(file, false))
         {
-            writer.WriteLine(playerScore);
+            writer.WriteLine(JsonUtility.ToJson(new Score (playerScore)));
         }
     }
 }
