@@ -1,0 +1,25 @@
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+    <h2>Login</h2> 
+
+    <div>
+      <!-- <label for="username">Username</label> -->
+      <input id="username" formControlName="username" type="text" placeholder="Username" />
+    </div>
+
+    <div>
+      <!-- <label for="password">Password</label> -->
+      <input id="password" formControlName="password" type="password" placeholder="Password" />
+    </div>
+
+    <div>
+      <button type="button" (click)="navigateToRegister()">Opret</button>
+      <button type="submit">Login</button>
+    </div>
+
+
+
+
+  </form>
+</div>

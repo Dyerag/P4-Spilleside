@@ -1,0 +1,28 @@
+<div class="score-container" >
+  <select [(ngModel)]="valgtSpilId" (ngModelChange)="hentScores()">
+    <option [ngValue]="null" disabled>Vælg spil</option>
+    <option *ngFor="let spil of spilListe" [ngValue]="spil.spilId">
+      {{ spil.navn }}
+    </option>
+  </select>
+  
+  <div class="mode-selector" style="margin-bottom: .5rem;">
+    <button class="mode-button bruger-knap"
+      [class.active]="visning==='bruger'"
+      (click)="setVisning('bruger')">Bruger
+    </button>
+    <button class="mode-button global-knap"
+      [class.active]="visning==='global'"
+      (click)="setVisning('global')">Global
+    </button>
+  </div>
+  
+  <div class="score-list">
+    <div *ngFor="let s of scores" class="score-item">
+      <strong>Bruger:</strong> {{ s.brugernavn }} |
+      <strong>Point:</strong> {{ s.point }} |
+      <strong>Dato:</strong> {{ s.dato | date:'dd.MM.yyyy HH:mm:ss' }}
+    </div>
+  </div>
+
+</div>

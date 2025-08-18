@@ -1,0 +1,24 @@
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+
+    <h2>Opret Bruger</h2>
+
+    <div>
+      <input id="username" formControlName="username" type="text" placeholder="Username"/>
+    </div>
+
+    <div>
+      <input id="password" formControlName="password" type="password" placeholder="Password" />
+    </div>
+
+    <div>
+      <button type="button" (click)="navigateToLogin()">Tilbage</button>
+      <button type="submit">Opret</button>
+    </div>
+
+    <div *ngIf="errorMessage" style="color: red; margin-top: 1rem;">
+      {{ errorMessage }}
+    </div>
+
+  </form>
+</div>

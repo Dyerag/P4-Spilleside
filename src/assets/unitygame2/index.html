@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WebGL Runner</title>
+  <style>
+    html,body{margin:0;height:100%;overflow:hidden;font-family:sans-serif}
+    #hud{position:fixed;left:12px;top:10px;padding:6px 10px;background:rgba(0,0,0,.4);color:#fff;border-radius:8px}
+  </style>
+</head>
+<body>
+  <div id="hud">Score: 0</div>
+
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x111111);
+
+    const camera = new THREE.PerspectiveCamera(70, innerWidth/innerHeight, 0.1, 100);
+    camera.position.set(0,2,6);
+    camera.lookAt(0,0.5,0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias:true });
+    renderer.setSize(innerWidth, innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x333333, 1));
+
+    const floor = new THREE.Mesh(
+      new THREE.PlaneGeometry(10, 200),
+      new THREE.MeshStandardMaterial({ color:0x222222 })
+    );
+    floor.rotation.x = -Math.PI/2;
+    floor.position.z = -50;
+    scene.add(floor);
+
+    const player = new THREE.Mesh(
+      new THREE.BoxGeometry(1,1,1),
+      new THREE.MeshStandardMaterial({ color:0x44aa88 })
+    );
+    player.position.set(0,0.5,2);
+    scene.add(player);
+
+    const lanes=[-2,0,2]; let currentLane = 1;
+    let leftOnce=false, rightOnce=false;
+
+    addEventListener('keydown', e => {
+      if(e.key==='ArrowLeft'||e.key==='a') leftOnce = true;
+      if(e.key==='ArrowRight'||e.key==='d') rightOnce = true;
+      if(e.key.toLowerCase()==='r' && !alive) reset();
+    });
+
+    const obstacles=[];
+    for(let i=0;i<8;i++){
+      const box=new THREE.Mesh(
+        new THREE.BoxGeometry(1,1,1),
+        new THREE.MeshStandardMaterial({color:0xcc3344})
+      );
+      box.position.set(lanes[Math.floor(Math.random()*lanes.length)],0.5,-(10+i*12));
+      scene.add(box); obstacles.push(box);
+    }
+
+    const hud=document.getElementById('hud');
+    let speed=0.05, score=0, alive=true, posted=false; 
+
+    function resetObstacle(o){
+      o.position.z = - (40 + Math.random()*40);
+      o.position.x = lanes[Math.floor(Math.random()*lanes.length)];
+    }
+
+    function reset(){
+      obstacles.forEach(resetObstacle);
+      player.position.x=0; currentLane=1; score=0; speed=0.05; alive=true; posted=false; 
+    }
+
+    function loop(){
+      if(alive){
+        if(leftOnce){ currentLane=Math.max(0,currentLane-1); leftOnce=false; }
+        if(rightOnce){ currentLane=Math.min(2,currentLane+1); rightOnce=false; }
+        player.position.x += (lanes[currentLane]-player.position.x)*0.3;
+
+        for(const o of obstacles){
+          o.position.z += speed*6;
+          if(o.position.z>6){
+            resetObstacle(o); score++; speed = Math.min(0.15, speed + 0.003);
+          }
+          if(Math.abs(o.position.z - player.position.z) < 0.8 &&
+             Math.abs(o.position.x - player.position.x) < 0.8){
+            alive=false;
+            hud.textContent = `Game Over — Score: ${score}. Tryk R for at starte igen`;
+
+            // Send besked til Angular om at spillet er slut
+            if (!posted){
+              posted = true;
+              window.parent.postMessage({ type: 'GAME_OVER', score }, window.location.origin);
+            }
+          }
+        }
+        if(alive) hud.textContent=`Score: ${score}`;
+      }
+      renderer.render(scene, camera);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    addEventListener('resize', ()=>{
+      camera.aspect = innerWidth/innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+  </script>
+</body>
+</html>
