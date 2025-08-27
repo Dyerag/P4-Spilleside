@@ -9,7 +9,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/dea/Documents/Flappy Bird WebGL Build;;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/dea/P4-Spilleside - Angular/P4-Spilleside/src/assets/Flappy Bird WebGL;C:/Users/dea/Documents/Flappy Bird WebGL;C:/Users/dea/Documents/Flappy Bird WebGL Build;;;;;;;\"}"
             }
         ]
     }

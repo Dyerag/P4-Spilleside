@@ -1,4 +1,3 @@
-using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,8 +15,10 @@ public class LogicScript : MonoBehaviour
     public GameObject Bird;
     public GameObject PipeSpawner;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void SaveScore(string score);
+    private static extern void SendScore(int score);
+#endif
 
     // ContextMenu tilføjer en knap til at teste metoden
     /// <summary>
@@ -36,7 +37,7 @@ public class LogicScript : MonoBehaviour
 
     public void RestartGame()
     {
-        // Henter den samme scene for at gæninlæse spillet
+        // Henter den samme scene for at genindlæse spillet
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -45,16 +46,9 @@ public class LogicScript : MonoBehaviour
     {
         PointGain = false;
         // Angular siden skal have ha en function der er synlig, umiddelbart med samme navn som denne
-        SaveScore(JsonUtility.ToJson(new Score(playerScore)));
+#if UNITY_WEBGL && !UNITY_EDITOR
+        SendScore(playerScore);
+#endif
         gameOverScreen.SetActive(true);
-    }
-}
-
-public class Score
-{
-    public int PlayerScore;
-    public Score(int score)
-    {
-        PlayerScore = score;
     }
 }
