@@ -13,7 +13,7 @@ export const SCORE_REPORTER_CONFIG = {
 
   /** Registrer alle spil her (key bruges i report(score, 'key')) */
   games: {
-    unitygame1: { spilId: 1, navn: 'unitygame1' } as GameEntry,
+    unitygame1: { spilId: 1, navn: 'Flappy Bird' } as GameEntry,
     unitygame2: { spilId: 1002, navn: 'spil2' } as GameEntry,
     // Tilføj flere spil her:
     // myOtherGame: { spilId: 3, navn: 'myOtherGame' },
