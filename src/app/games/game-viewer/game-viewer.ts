@@ -40,36 +40,39 @@ export class GameViewerComponent implements OnInit {
     }
   }
 
-  //  TILFØJET: lyt efter beskeder fra spillet (iframe -> window.postMessage)
-  @HostListener('window:message', ['$event'])
-  async onGameMessage(event: MessageEvent) {
-    // Basal sikkerhed: accepter kun samme origin
-    if (event.origin !== window.location.origin) return;
+  
 
-    const data = event.data;
-    let score: number | null = null;
+  // Dette ser umiddelbart ud til at bruges made unitygame2, som ikke engang var lavet med unity, og er irrelevant
+  // //  TILFØJET: lyt efter beskeder fra spillet (iframe -> window.postMessage)
+  // @HostListener('window:message', ['$event'])
+  // async onGameMessage(event: MessageEvent) {
+  //   // Basal sikkerhed: accepter kun samme origin
+  //   if (event.origin !== window.location.origin) return;
 
-    // Understøt både { type:'GAME_OVER', score } og bare { score }
-    if (data && typeof data === 'object') {
-      if (typeof (data as any).score === 'number') {
-        score = (data as any).score;
-      } else if ((data as any).type === 'GAME_OVER' && typeof (data as any).value === 'number') {
-        score = (data as any).value;
-      }
-    } else if (typeof data === 'number') {
-      // Fallback: hvis spil bare poster et tal
-      score = data;
-    }
+  //   const data = event.data;
+  //   let score: number | null = null;
 
-    if (score == null) return;
+  //   // Understøt både { type:'GAME_OVER', score } og bare { score }
+  //   if (data && typeof data === 'object') {
+  //     if (typeof (data as any).score === 'number') {
+  //       score = (data as any).score;
+  //     } else if ((data as any).type === 'GAME_OVER' && typeof (data as any).value === 'number') {
+  //       score = (data as any).value;
+  //     }
+  //   } else if (typeof data === 'number') {
+  //     // Fallback: hvis spil bare poster et tal
+  //     score = data;
+  //   }
 
-    try {
-      // Brug mappenavnet som key til config (fx 'unitygame2')
-      const gameKey = (this.folderName || '').toLowerCase();
-      await this.scoreReporter.report(score, gameKey);
-      console.log('Score gemt for', gameKey, '→', score);
-    } catch (err) {
-      console.error('Kunne ikke gemme score:', err);
-    }
-  }
+  //   if (score == null) return;
+
+  //   try {
+  //     // Brug mappenavnet som key til config (fx 'unitygame2')
+  //     const gameKey = (this.folderName || '').toLowerCase();
+  //     await this.scoreReporter.report(score, gameKey);
+  //     console.log('Score gemt for', gameKey, '→', score);
+  //   } catch (err) {
+  //     console.error('Kunne ikke gemme score:', err);
+  //   }
+  // }
 }

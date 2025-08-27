@@ -20,7 +20,7 @@ export class GameListComponent  {
   
    //games = new Array(7).fill(null); // Midlertidigt placeholder array
   games: Game[] = [
-    { name: 'spil1', folder: 'unitygame1' },
+    { name: 'Flappy Bird', folder: 'Flappy Bird WebGL' },
     { name: 'spil2', folder: 'unitygame2' },
   ];
 
