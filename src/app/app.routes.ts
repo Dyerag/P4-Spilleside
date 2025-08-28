@@ -10,8 +10,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
-  { path: 'games', component: GameListComponent, canActivate: [authGuard] }, //  canActivate: [authGuard]
-  { path: 'games/view/:folder', component: GameViewerComponent, canActivate: [authGuard]},
+  { path: 'games', component: GameListComponent, /*canActivate: [authGuard] "removed for temporary access"*/ }, //  canActivate: [authGuard]
+  { path: 'games/view/:folder', component: GameViewerComponent, /*canActivate: [authGuard]*/},
   { path: 'score-list', component: ScoreListComponent, }, 
   { path: '**', redirectTo: 'login' }
 ];
