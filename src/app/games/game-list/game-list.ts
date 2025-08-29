@@ -6,6 +6,7 @@ import { RouterModule, Router } from '@angular/router';
 interface Game {
   name: string;
   folder: string| null;
+  icon: string | null;
 }
 
 @Component({
@@ -20,8 +21,10 @@ export class GameListComponent  {
   
    //games = new Array(7).fill(null); // Midlertidigt placeholder array
   games: Game[] = [
-    { name: 'Flappy Bird', folder: 'Flappy Bird WebGL' },
-    { name: 'spil2', folder: 'unitygame2' },
+    { name: 'Flappy-Bird', folder: 'Flappy Bird WebGL', icon: 'Flappy thumbnail.png' },
+    {
+      name: 'spil2', folder: 'unitygame2', icon: null
+    },
   ];
 
   // navigateToGame(game: Game): void {

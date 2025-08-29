@@ -33,7 +33,7 @@
   content: '';
   width: 80%;
   height: 80%;
-  border: 1px solid black;
+  border: 3px solid black;
  
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -41,4 +41,10 @@
   top: 10%;
   left: 10%;
   pointer-events: none; /* vigtigt så klik stadig virker */
+}
+
+img {
+  max-width: 160px;
+  max-height: 160px;
+  /* object-fit: contain; */
 }
