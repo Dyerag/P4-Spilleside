@@ -29,41 +29,12 @@ namespace SpilAPI.Controllers
                 .Include(s => s.Spil)
                 .Select(s => new ScoreDto
                 {
-                    ScoreId = s.ScoreId,
-                    BrugerId = s.BrugerId,
-                    Brugernavn = s.Bruger.Brugernavn,
-                    SpilId = s.SpilId,
-                    Spilnavn = s.Spil.Navn,
+                    Brugernavn = s.Bruger!.Brugernavn,
+                    Spilnavn = s.Spil!.Navn,//
                     Point = s.Point,
                     Dato = s.Dato
                 })
                 .ToListAsync();
-        }
-
-        // GET: api/scores/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ScoreDto>> GetScore(int id)
-        {
-            var score = await _context.Scores
-                .Include(s => s.Bruger)
-                .Include(s => s.Spil)
-                .Where(s => s.ScoreId == id)
-                .Select(s => new ScoreDto
-                {
-                    ScoreId = s.ScoreId,
-                    BrugerId = s.BrugerId,
-                    Brugernavn = s.Bruger.Brugernavn,
-                    SpilId = s.SpilId,
-                    Spilnavn = s.Spil.Navn,
-                    Point = s.Point,
-                    Dato = s.Dato
-                })
-                .FirstOrDefaultAsync();
-
-            if (score == null)
-                return NotFound();
-
-            return score;
         }
 
         // POST: api/scores
@@ -88,56 +59,29 @@ namespace SpilAPI.Controllers
             _context.Scores.Add(score);
             await _context.SaveChangesAsync();
 
-            // Returnér fx en DTO uden navigation properties
-            var resultDto = new ScoreDto
-            {
-                ScoreId = score.ScoreId,
-                BrugerId = score.BrugerId,
-                SpilId = score.SpilId,
-                Point = score.Point,
-                Dato = score.Dato
-                // evt. tilføj Brugernavn/Spilnavn hvis du vil
-            };
-
-            return CreatedAtAction(nameof(GetScore), new { id = score.ScoreId }, resultDto);
+            return Ok();
         }
 
-        // PUT: api/scores/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutScore(int id, Score score)
+        
+
+        // GET: api/scores/spil/{spilId}
+        [HttpGet("spil/{spilId:int}")]
+        public async Task<ActionResult<IEnumerable<ScoreDto>>> GetScoresBySpilId(int spilId)
         {
-            if (id != score.ScoreId)
-                return BadRequest();
+            var scores = await _context.Scores
+                .AsNoTracking()
+                .Where(s => s.SpilId == spilId)
+                .Select(s => new ScoreDto
+                {
 
-            _context.Entry(score).State = EntityState.Modified;
+                    Brugernavn = s.Bruger!.Brugernavn,
+                    Spilnavn = s.Spil!.Navn,//
+                    Point = s.Point,
+                    Dato = s.Dato
+                })
+                .ToListAsync();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Scores.Any(e => e.ScoreId == id))
-                    return NotFound();
-                else
-                    throw;
-            }
-
-            return NoContent();
-        }
-
-        // DELETE: api/scores/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteScore(int id)
-        {
-            var score = await _context.Scores.FindAsync(id);
-            if (score == null)
-                return NotFound();
-
-            _context.Scores.Remove(score);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return scores; 
         }
     }
 }

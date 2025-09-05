@@ -8,9 +8,7 @@ namespace SpilAPI.Models
         public int SpilId { get; set; }
 
         [Required] 
-        public string Navn { get; set; }
-
-    
+        public required string Navn { get; set; }
+        public required string IkonNavn { get; set; }
     }
 }
-

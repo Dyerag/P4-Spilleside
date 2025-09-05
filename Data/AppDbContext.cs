@@ -17,22 +17,6 @@ namespace SpilAPI.Data
             modelBuilder.Entity<Bruger>()
                 .HasIndex(u => u.Brugernavn)
                 .IsUnique();
-
-            // Seed initial games
-            modelBuilder.Entity<Spil>().HasData(
-                new Spil
-                {
-                    SpilId = 1,
-                    Navn = "Boldspil"
-                   
-                },
-                new Spil
-                {
-                    SpilId = 2,
-                    Navn = "Puslespil"
-                   
-                }
-            );
         }
     }
 }

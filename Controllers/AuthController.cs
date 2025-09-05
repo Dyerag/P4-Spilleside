@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using SpilAPI.Data;
 using SpilAPI.Models;
+using SpilAPI.DTO;
 
 namespace SpilAPI.Controllers
 {
@@ -76,17 +77,5 @@ namespace SpilAPI.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-    }
-
-    public class RegisterDto
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
-
-    public class LoginDto
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

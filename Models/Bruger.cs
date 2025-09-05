@@ -7,12 +7,10 @@ namespace SpilAPI.Models
         [Key] public int BrugerId { get; set; }
 
         [Required]
-        public string Brugernavn { get; set; }
+        public required string Brugernavn { get; set; }
 
         [Required]
-        public string Password { get; set; }
-
-       
+        public required string Password { get; set; }
     }
 }
 
